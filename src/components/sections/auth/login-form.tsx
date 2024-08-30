@@ -18,7 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z
@@ -31,6 +31,7 @@ const schema = z.object({
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = React.useState(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -64,7 +65,7 @@ export default function LoginForm() {
       success: () => {
         setIsLoading(false);
         form.reset();
-        redirect("/home");
+        router.replace("/home");
         return "Login successful";
       },
       error: (err) => {

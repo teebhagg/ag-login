@@ -2,7 +2,9 @@
 
 import LoginForm from "@/components/sections/auth/login-form";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
+import { Suspense } from "react";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
@@ -41,6 +43,7 @@ export default function LoginPage() {
       </div>
 
       <div className="hidden h-full bg-muted md:flex col-span-1">
+        <Suspense fallback={<Skeleton className="w-full max-h-[500px]" />}>
         <Image
           src="/assets/images/login.png"
           alt="Image"
@@ -49,6 +52,7 @@ export default function LoginPage() {
           quality={100}
           className="my-auto w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
+        </Suspense>
       </div>
     </div>
   );
